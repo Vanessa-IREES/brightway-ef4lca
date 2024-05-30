@@ -1,0 +1,271 @@
+{
+  "csv_file_name": "OBD.csv",
+  "csv_file_url": "https://www.oekobaudat.de/OEKOBAU.DAT/resource/datastocks/c391de0f-2cfd-47ea-8883-c661d294e2ba/exportCSV?decimalSeparator=comma",
+  "should_download": true,
+  "columns_to_include": [
+    "UUID",
+    "Name (de)",
+    "Name (en)",
+    "Bezugsgroesse",
+    "Bezugseinheit",
+    "Modul",
+    "Szenario",
+    "Typ",
+    "AP (A2)",
+    "GWPtotal (A2)",
+    "GWPbiogenic (A2)",
+    "GWPfossil (A2)",
+    "GWPluluc (A2)",
+    "ETPfw (A2)",
+    "ADPF (A2)",
+    "EPfreshwater (A2)",
+    "EPmarine (A2)",
+    "EPterrestrial (A2)",
+    "HTPc (A2)",
+    "HTPnc (A2)",
+    "IRP (A2)",
+    "SOP (A2)",
+    "ADPE (A2)",
+    "ODP (A2)",
+    "PM (A2)",
+    "POCP (A2)",
+    "WDP (A2)"
+  ],
+  "dtype": {
+    "UUID": "string",
+    "Name (de)": "string",
+    "Name (en)": "string",
+    "Bezugsgroesse": "string",
+    "Bezugseinheit": "string",
+    "Modul": "string",
+    "Szenario": "string",
+    "Typ": "string",
+    "AP (A2)": "float",
+    "GWPtotal (A2)": "float",
+    "GWPbiogenic (A2)": "float",
+    "GWPfossil (A2)": "float",
+    "GWPluluc (A2)": "float",
+    "ETPfw (A2)": "float",
+    "ADPF (A2)": "float",
+    "EPfreshwater (A2)": "float",
+    "EPmarine (A2)": "float",
+    "EPterrestrial (A2)": "float",
+    "HTPc (A2)": "float",
+    "HTPnc (A2)": "float",
+    "IRP (A2)": "float",
+    "SOP (A2)": "float",
+    "ADPE (A2)": "float",
+    "ODP (A2)": "float",
+    "PM (A2)": "float",
+    "POCP (A2)": "float",
+    "WDP (A2)": "float"
+  },
+  "product_id_label": "product_id",
+  "mods": [
+    "A1",
+    "A2",
+    "A3",
+    "A4",
+    "A5",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "D"
+  ],
+  "impact_cats": {
+    "AP (A2)": {
+      "unit": "mol H+-Eq",
+      "category": "AP (A2)",
+      "bs_ref": [
+        {
+          "amount": 0.763358778,
+          "code": "16521d00-4b6f-464f-b5dd-8da4a27b15ca"
+        }
+      ]
+    },
+    "GWPtotal (A2)": {
+      "unit": "kg CO2 eq.",
+      "category": "GWPtotal (A2)",
+      "bs_ref": []
+    },
+    "GWPbiogenic (A2)": {
+      "unit": "kg CO2 eq.",
+      "category": "GWPbiogenic",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "eba59fd6-f37e-41dc-9ca3-c7ea22d602c7"
+        }
+      ]
+    },
+    "GWPfossil (A2)": {
+      "unit": "kg CO2 eq.",
+      "category": "GWPfossil",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "349b29d1-3e58-4c66-98b9-9d1a076efd2e"
+        }
+      ]
+    },
+    "GWPluluc (A2)": {
+      "unit": "kg CO2 eq.",
+      "category": "GWPluluc",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "e4e9febc-07c1-403d-8d3a-6707bb4d96e6"
+        }
+      ]
+    },
+    "ETPfw (A2)": {
+      "unit": "CTUe",
+      "category": "ETPfw (A2)",
+      "bs_ref": [
+        {
+          "amount": 0.057365764,
+          "code": "da5e6be3-ed71-48ac-9397-25bac666c7b7"
+        }
+      ]
+    },
+    "ADPF (A2)": {
+      "unit": "MJ, net calorific value",
+      "category": "ADPF",
+      "bs_ref": [
+        {
+          "amount": 0.106269925,
+          "code": "024c9722-1e88-412b-8c4b-10c532be8dca"
+        }
+      ]
+    },
+    "EPfreshwater (A2)": {
+      "unit": "kg P-Eq",
+      "category": "EPfreshwater (A2)",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "76b09afe-52b9-4ecc-b97a-00b49ad8ed1a"
+        }
+      ]
+    },
+    "EPmarine (A2)": {
+      "unit": "kg N-Eq",
+      "category": "EPmarine (A2)",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "dcfe0815-6fa3-4e1d-a55e-155b29904f1d"
+        }
+      ]
+    },
+    "EPterrestrial (A2)": {
+      "unit": "mol N-Eq",
+      "category": "EPterrestrial (A2)",
+      "bs_ref": [
+        {
+          "amount": 0.316390615,
+          "code": "5e7cf95c-9cc3-4479-89af-55377b3db99c"
+        }
+      ]
+    },
+    "HTPc (A2)": {
+      "unit": "CTUh",
+      "category": "HTPc (A2)",
+      "bs_ref": [
+        {
+          "amount": 141.586906,
+          "code": "10df31ce-d6ad-42b6-8fb2-9dfdb588e9ec"
+        }
+      ]
+    },
+    "HTPnc (A2)": {
+      "unit": "CTUh",
+      "category": "HTPnc (A2)",
+      "bs_ref": [
+        {
+          "amount": 22762.451060730,
+          "code": "c955fc32-da91-468e-8f65-5aca2c8aa4cc"
+        }
+      ]
+    },
+    "IRP (A2)": {
+      "unit": "kBq U235-Eq",
+      "category": "IRP (A2)",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "698d08b4-fee6-40d4-93dd-24a28d48df45"
+        }
+      ]
+    },
+    "SOP (A2)": {
+      "unit": "dimensionless",
+      "category": "SOP (A2)",
+      "bs_ref": [
+        {
+          "amount": 0.0199238907,
+          "code": "c5aafa60-495c-461c-a1d4-b262a34c45b9"
+        }
+      ]
+    },
+    "ADPE (A2)": {
+      "unit": "kg Sb-Eq",
+      "category": "ADPE (A2)",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "47262180-8308-5d4c-9332-c77617e032ef"
+        }
+      ]
+    },
+    "ODP (A2)": {
+      "unit": "kg CFC-11-Eq",
+      "category": "ODP (A2)",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "3feb6415-ae50-4bb7-b9d1-c18d99f8a87f"
+        }
+      ]
+    },
+    "PM (A2)": {
+      "unit": "disease incidence",
+      "category": "PM (A2)",
+      "bs_ref": [
+        {
+          "amount": 4192.8721174004,
+          "code": "21e46cb8-6233-4c99-bac3-c41d2ab99498"
+        }
+      ]
+    },
+    "POCP (A2)": {
+      "unit": "kg NMVOC-Eq",
+      "category": "POCP (A2)",
+      "bs_ref": [
+        {
+          "amount": 1,
+          "code": "3f5339ef-1939-4f44-8cd6-98ac7584d456"
+        }
+      ]
+    },
+    "WDP (A2)": {
+      "unit": "m3 world eq. deprived",
+      "category": "WDP (A2)",
+      "bs_ref": [
+        {
+          "amount": 0.023282887078,
+          "code": "075e433b-4be4-448e-9510-9a5029c1ce94"
+        }
+      ]
+    }
+  },
+  "obd_impact_cats": "impact_cats_proxies"
+}
