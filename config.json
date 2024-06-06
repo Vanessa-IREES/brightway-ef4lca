@@ -81,13 +81,23 @@
     "D"
   ],
   "impact_cats": {
-    "AP (A2)": {
+    "AP (A2)_non-unique": {
       "unit": "mol H+-Eq",
       "category": "AP (A2)",
       "bs_ref": [
         {
           "amount": 0.763358778,
           "code": "16521d00-4b6f-464f-b5dd-8da4a27b15ca"
+        }
+      ]
+    },
+    "AP (A2)_balancing_in_POCP (A2)": {
+      "unit": "mol H+-Eq",
+      "category": "AP (A2)",
+      "bs_ref": [
+        {
+          "amount": -0.0589603780443475,
+          "code": "f202452b-5aff-45e6-9001-5fb0a2de7992"
         }
       ]
     },
@@ -166,13 +176,23 @@
         }
       ]
     },
-    "EPterrestrial (A2)": {
+    "EPterrestrial (A2)_non-unique": {
       "unit": "mol N-Eq",
       "category": "EPterrestrial (A2)",
       "bs_ref": [
         {
           "amount": 0.316390615,
           "code": "5e7cf95c-9cc3-4479-89af-55377b3db99c"
+        }
+      ]
+    },
+    "EPterrestrial (A2)_balancing_in_EPmarine (A2)": {
+      "unit": "mol N-Eq",
+      "category": "EPterrestrial (A2)",
+      "bs_ref": [
+        {
+          "amount": -0.0402678965632788,
+          "code": "b9291c72-4b1d-4275-8068-4c707dc3ce33"
         }
       ]
     },
@@ -226,13 +246,23 @@
         }
       ]
     },
-    "ODP (A2)": {
+    "ODP (A2)_non-unique": {
       "unit": "kg CFC-11-Eq",
       "category": "ODP (A2)",
       "bs_ref": [
         {
           "amount": 1,
           "code": "3feb6415-ae50-4bb7-b9d1-c18d99f8a87f"
+        }
+      ]
+    },
+    "ODP (A2)_balancing_in_GWPfossil (A2)": {
+      "unit": "kg CFC-11-Eq",
+      "category": "ODP (A2)",
+      "bs_ref": [
+        {
+          "amount": -6230,
+          "code": "f9749677-9c9f-4678-ab55-c607dfdc2cb9"
         }
       ]
     },
