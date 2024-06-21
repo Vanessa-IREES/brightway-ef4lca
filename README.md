@@ -4,7 +4,7 @@ The contained notebook serves to process and import data from the oekobaudat dat
 Oekobaudat provides environmental data for for ecological evaluations of buildings by the German ederal Ministry for Housing, Urban Development and Building https://www.oekobaudat.de/en.html.
 The notebook facilitates importing oekobaudat data into Brightway2, enabling users to perform LCAs together with other LCA databases. 
 
-**!!! - This import of the oekobaudat is only valid when using the impact categories of EF3.1 EN 15804! - !!!**
+**!!! - This import of the oekobaudat is only valid when using the impact categories of EF3.0 EN 15804! - !!!**
 
 The script performs several tasks:
 
