@@ -1,7 +1,7 @@
 ### Description:
 
 The contained notebook serves to process and import data from the oekobaudat database into Brightway2, an open-source framework for life cycle assessment (LCA). 
-Oekobaudat provides environmental data for for ecological evaluations of buildings by the German ederal Ministry for Housing, Urban Development and Building https://www.oekobaudat.de/en.html.
+Oekobaudat provides environmental data for for ecological evaluations of buildings by the German Federal Ministry for Housing, Urban Development and Building https://www.oekobaudat.de/en.html.
 The notebook facilitates importing oekobaudat data into Brightway2, enabling users to perform LCAs together with other LCA databases. 
 
 **!!! - This import of the oekobaudat is only valid when using the impact categories of EF3.0 EN 15804! - !!!**
