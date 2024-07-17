@@ -306,16 +306,18 @@ def import_impact_categories_db(config, biosphere_db):
     cc_dict = {}
     for i in range(len(config['ic_names'])):
         ic_name = config['ic_names'][i]
+        code = f'bobd{i}'
         if ic_name in config['ic_biosphere_map']:
             print(f'Found mapping for: {ic_name}')
             entry = {
                 'name': ic_name,
-                'reference product': ic_name,
                 'exchanges': [],
                 'unit': config['obd_units'][i],
                 'categories': (config['obd_cats'][i]),
                 'type': 'process',
-                'location': 'GLO'
+                'production amount': 1.0,
+                'location': 'GLO',
+                'code': code
             }
             for mapping in config['ic_biosphere_map'][ic_name]:
                 bs_dic = biosphere_db.get(mapping['code']).as_dict()
@@ -328,8 +330,8 @@ def import_impact_categories_db(config, biosphere_db):
                     'input': ('biosphere3', mapping['code']),
                     'categories': bs_dic['categories']
                 })
-            cc_dict[(config['obd_impact_cats'], f'bobd{i}')] = entry
-
+            cc_dict[(config['obd_impact_cats'], code)] = entry
+            #print(f"ENTRIES of {ic_name} are {entry['exchanges']}")
     obd_db.write(cc_dict)
 
 # print(cc_dict)
@@ -348,7 +350,7 @@ def prepare_db_dict(config, db_name, data_frame, id_label, ic_names):
     for index, row in data_frame.iterrows():
         te = {
             'id': row[id_label],
-            'name': row[id_label],
+            'name': row['Name (de)'],
             'exchanges': [],
             'unit': row['Bezugseinheit'],
             'categories': ('OBD'),
@@ -367,7 +369,7 @@ def prepare_db_dict(config, db_name, data_frame, id_label, ic_names):
                     'amount': row[ic_name],
                     'name': ic_name,
                     'database': config['obd_impact_cats'],
-                    'type': 'biosphere',  # must be biosphere to be found
+                    'type': 'technosphere',  # must be biosphere/technosphere
                     'unit': config['obd_units'][idx],
                     'input': (config['obd_impact_cats'], f'bobd{idx}'),
                     'categories': [config['obd_cats'][idx]]})
