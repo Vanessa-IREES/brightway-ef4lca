@@ -73,48 +73,26 @@ def unfold_scenarios(config, df):
     base_rows = df[df['UUID'] == df[product_id_label]]
     # print(base_rows)
 
-    # Cleanup products which have scenario but also include the same moduls without scenario (we then add a dummy scenario for the matching)
-    matching_products = []
-    for uuid in unique_products_with_scenarios:
-        base_moduls = set(base_rows[base_rows['UUID'] == uuid]['Modul'])
-        scenario_moduls = set(
-            products_with_scenarios[products_with_scenarios['UUID'] == uuid]['Modul'])
-        intersection = base_moduls & scenario_moduls
-        if intersection:  # Check for intersection
-            for module in intersection:
-                matching_products.append([uuid, module])
-
-    for p in matching_products:
-        # remove from base rows
-        base_rows = base_rows[(base_rows['UUID'] == p[0]) & (
-            base_rows['Modul'] == p[1]) & (base_rows['Szenario'] == '')]
-        # add to df and products_with_scenarios
-        mask = (df['UUID'] == p[0]) & (
-            df['Modul'] == p[1]) & (df['Szenario'] == '')
-        df.loc[mask, 'Szenario'] = 'dummy_Szenario'
-        df.loc[mask, product_id_label] = f'{p[0]}#dummy_Szenario'
-        products_with_scenarios = pd.concat(
-            [products_with_scenarios, df[mask]], ignore_index=True)
-
-    # print(products_with_scenarios)
-
     # Remove rows referring to products with scenarios
     df_filtered = df[~df['UUID'].isin(unique_products_with_scenarios)]
 
-    # Identify Relevant Scenarios for Each Product (distinct rows)
-    relevant_scenarios = products_with_scenarios.drop_duplicates(
-        subset=['UUID', product_id_label])
+    # Identify Relevant Scenarios for Each Product (distinct rows)    
+    relevant_scenarios = products_with_scenarios.drop_duplicates(subset=[product_id_label])
 
     # print(relevant_scenarios)
 
     # Step 4: Copy Base Rows for Each Scenario
     frames = []
     for _, scenario in relevant_scenarios.iterrows():
-        temp_base = base_rows[base_rows['UUID'] == scenario['UUID']].copy()
-        temp_base[product_id_label] = scenario[product_id_label]
-
+        #all rows with filled szen col for a certain product_id_label
         temp_scenario = df[(df['UUID'] == scenario['UUID']) & (
             df[product_id_label] == scenario[product_id_label])]
+        #modules containe in scenario
+        scen_mods = set(temp_scenario['Modul'])
+        # base rows to fill up scenario with remaining modules (contain only modules which aren't already in scenario)
+        temp_base = base_rows[(base_rows['UUID'] == scenario['UUID']) & (~base_rows['Modul'].isin(scen_mods))].copy()
+        temp_base[product_id_label] = scenario[product_id_label]
+
         frames.append(temp_base)
         frames.append(temp_scenario)
 
