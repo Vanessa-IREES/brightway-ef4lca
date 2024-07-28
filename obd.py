@@ -44,7 +44,6 @@ def prepare_obd_data(df):
     # check types
     return df
 
-
 def unfold_scenarios(config, df):
     """ builds actually unique products (by scenario) by building a config["product_id_label"] named column which holds UUID and Scenario. This is necessary to prevent wrong aggregations over UUID only.
     """
@@ -92,6 +91,7 @@ def unfold_scenarios(config, df):
         # base rows to fill up scenario with remaining modules (contain only modules which aren't already in scenario)
         temp_base = base_rows[(base_rows['UUID'] == scenario['UUID']) & (~base_rows['Modul'].isin(scen_mods))].copy()
         temp_base[product_id_label] = scenario[product_id_label]
+        temp_base["Szenario"] = scenario["Szenario"]
 
         frames.append(temp_base)
         frames.append(temp_scenario)
@@ -149,11 +149,12 @@ def map_value(item, map):
 
 # eg.: ['A1-A3', 'A4', 'A5']
 def format_aggregation_key(config, modules):
-    """ builds keys from passed modules which reflect the sequences which can be build from the passed modules. To to this the modules are ordered (in config["mods"]) and each can be represented by an integer.
+    """ builds keys from passed modules which reflect the sequences which can be build from the passed modules. 
+    To do this the modules are ordered (in config["mods"]) and each can be represented by an integer.
     """
     mc = config['mods'][:]
 
-    # replace modules in mc with aggregations: ['A1', 'A2, 'A3', 'A4', 'A5'] -> ['A1-A3', 'A4', 'A5']
+    # replace modules in mc with aggregations: ['A1', 'A2, 'A3', 'A4', 'A5'] -> ['A1-A5']
     # this changes the copy (mc) of the initially read modules list
     for m in modules:
         match = re.search(pattern, m)
