@@ -29,7 +29,7 @@ def prepare_obd_data(df):
     # replace name (de) with english name if no name is available
     df['Name (de)'] = df.apply(lambda row: str(row['Name (en)'])
                                if row['Name (de)'] == '' else str(row['Name (de)']), axis=1)
-    
+
     # TODO sanity
     df['Bezugsgroesse'] = df['Bezugsgroesse'].replace(
         r'[^0-9.]', '0', regex=True).astype(float)
@@ -43,6 +43,7 @@ def prepare_obd_data(df):
 
     # check types
     return df
+
 
 def unfold_scenarios(config, df):
     """ builds actually unique products (by scenario) by building a config["product_id_label"] named column which holds UUID and Scenario. This is necessary to prevent wrong aggregations over UUID only.
@@ -75,21 +76,23 @@ def unfold_scenarios(config, df):
     # Remove rows referring to products with scenarios
     df_filtered = df[~df['UUID'].isin(unique_products_with_scenarios)]
 
-    # Identify Relevant Scenarios for Each Product (distinct rows)    
-    relevant_scenarios = products_with_scenarios.drop_duplicates(subset=[product_id_label])
+    # Identify Relevant Scenarios for Each Product (distinct rows)
+    relevant_scenarios = products_with_scenarios.drop_duplicates(subset=[
+                                                                 product_id_label])
 
     # print(relevant_scenarios)
 
     # Step 4: Copy Base Rows for Each Scenario
     frames = []
     for _, scenario in relevant_scenarios.iterrows():
-        #all rows with filled szen col for a certain product_id_label
+        # all rows with filled szen col for a certain product_id_label
         temp_scenario = df[(df['UUID'] == scenario['UUID']) & (
             df[product_id_label] == scenario[product_id_label])]
-        #modules containe in scenario
+        # modules containe in scenario
         scen_mods = set(temp_scenario['Modul'])
         # base rows to fill up scenario with remaining modules (contain only modules which aren't already in scenario)
-        temp_base = base_rows[(base_rows['UUID'] == scenario['UUID']) & (~base_rows['Modul'].isin(scen_mods))].copy()
+        temp_base = base_rows[(base_rows['UUID'] == scenario['UUID']) & (
+            ~base_rows['Modul'].isin(scen_mods))].copy()
         temp_base[product_id_label] = scenario[product_id_label]
         temp_base["Szenario"] = scenario["Szenario"]
 
@@ -238,7 +241,7 @@ def custom_aggregate(config, df, modules, delete_original=False):
         # Filter rows for the current product
         product_df = df[df[product_id_label] == product_id]
 
-        # Check if the aggregation already exists for this product
+        # Check if the aggregation already exists for this product (eg. A1-A3 is contained by default)
         if aggregation_key not in product_df['Modul'].values:
 
             # Further filter rows for the specified aspects
@@ -257,7 +260,7 @@ def custom_aggregate(config, df, modules, delete_original=False):
                     [df, pd.DataFrame([aggregated_data])], ignore_index=True)
 
         # wrong redundant modules sometimes thus apply to all
-        # Optionally delete the original rows that were aggregated
+        # Optionally delete the original rows that were aggregated (or for initial setup A1-A3 aggregation is contained by default, so dummy A1,A2,A3 must be removed)
         if delete_original:
             # cannot reuse filter mask bc. concatication
             filter_mask_2 = (df[product_id_label] ==
@@ -310,7 +313,7 @@ def import_impact_categories_db(config, biosphere_db):
                     'categories': bs_dic['categories']
                 })
             cc_dict[(config['obd_impact_cats'], code)] = entry
-            #print(f"ENTRIES of {ic_name} are {entry['exchanges']}")
+            # print(f"ENTRIES of {ic_name} are {entry['exchanges']}")
     obd_db.write(cc_dict)
 
 # print(cc_dict)
@@ -322,7 +325,7 @@ def prepare_db_dict(config, db_name, data_frame, id_label, ic_names):
 
     print(
         f'Prepare data for import, db name is {db_name}, dataframe is:\n {data_frame}...')
-    
+
     print(f'Will link these impact categories biosphere refs: {ic_names}.')
 
     db_dict = {}
@@ -337,8 +340,8 @@ def prepare_db_dict(config, db_name, data_frame, id_label, ic_names):
             'type': 'process',
             'production amount': row['Bezugsgroesse'],
             'location': 'DE',
-            'reference product': row['Name (de)'],
-            'comment': 'Typ: ' + row['Typ'],
+            'reference product': f"{row['Name (de)']}, Scenario: {row['Szenario']}, Aggregation: {row['Modul']}",
+            'comment': f"Typ: {row['Typ']}\nScenario: {row['Szenario']}\nAggregation: {row['Modul']}",
             'UUID': row['UUID']
         }
         for _, ic_name in enumerate(ic_names):
@@ -377,10 +380,12 @@ def prepare_and_write_new_db(config, db_name, data_frame, id_label, ic_names):
     write_new_db(db_name, prepare_db_dict(
         config, db_name, data_frame, id_label, ic_names))
 
+
 def reformat_cfs(ds):
     # https://github.com/brightway-lca/brightway2-io/blob/main/bw2io/importers/base_lcia.py#L94
     # Note: This assumes no uncertainty or regionalization
     return [((obj['input']), obj['amount']) for obj in ds]
+
 
 def read_and_prepare_obd_data(config, data_dir):
     """ read and prepare obd csv as dataframe which can be properly processed/used.
