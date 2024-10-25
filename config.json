@@ -1,6 +1,6 @@
 {
   "csv_file_name": "OBD.csv",
-  "csv_file_url": "https://www.oekobaudat.de/OEKOBAU.DAT/resource/datastocks/c391de0f-2cfd-47ea-8883-c661d294e2ba/exportCSV?decimalSeparator=comma",
+  "csv_file_url": "https://www.oekobaudat.de/OEKOBAU.DAT/resource/datastocks/ca70a7e6-0ea4-4e90-a947-d44585783626/exportCSV?decimalSeparator=comma",
   "should_download": true,
   "columns_to_include": [
     "UUID",
