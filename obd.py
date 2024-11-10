@@ -22,13 +22,13 @@ def prepare_obd_data(df):
     """
     print(f'Prepare OBD data...')
     # Replace all NaN values with empty strings
-    df['Name (de)'] = df['Name (de)'].replace({np.nan: ''})
+    df['Name (en)'] = df['Name (en)'].replace({np.nan: ''})
     df['Szenario'] = df['Szenario'].replace({np.nan: ''})
     # df['Bezugseinheit'] = df['Bezugseinheit'].replace({np.nan: ''}) #should be error without unit
 
-    # replace name (de) with english name if no name is available
-    df['Name (de)'] = df.apply(lambda row: str(row['Name (en)'])
-                               if row['Name (de)'] == '' else str(row['Name (de)']), axis=1)
+    # replace name (en) with german name if no english name is available
+    df['Name (en)'] = df.apply(lambda row: str(row['Name (de)'])
+                               if row['Name (en)'] == '' else str(row['Name (en)']), axis=1)
 
     # TODO sanity
     df['Bezugsgroesse'] = df['Bezugsgroesse'].replace(
@@ -332,7 +332,7 @@ def prepare_db_dict(config, db_name, data_frame, id_label, ic_names):
     for index, row in data_frame.iterrows():
         te = {
             'id': row[id_label],
-            'name': row['Name (de)'],
+            'name': row['Name (en)'],
             'exchanges': [],
             'unit': row['Bezugseinheit'],
             'categories': ('OBD'),
@@ -340,7 +340,7 @@ def prepare_db_dict(config, db_name, data_frame, id_label, ic_names):
             'type': 'process',
             'production amount': row['Bezugsgroesse'],
             'location': 'DE',
-            'reference product': f"{row['Name (de)']}, Scenario: {row['Szenario']}, Aggregation: {row['Modul']}",
+            'reference product': f"{row['Name (en)']}, Scenario: {row['Szenario']}, Aggregation: {row['Modul']}",
             'comment': f"Typ: {row['Typ']}\nScenario: {row['Szenario']}\nAggregation: {row['Modul']}",
             'UUID': row['UUID']
         }
