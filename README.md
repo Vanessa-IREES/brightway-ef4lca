@@ -1,5 +1,5 @@
 ### Related websites:
-This repository bases on the woks of finding unique biosphere (ecosphere) flows among all flows of one impact assessment method or multiple impact categories: https://github.com/Vanessa-IREES/Finding-unique-biosphere-flows.git
+This repository bases on the works of finding unique biosphere (ecosphere) flows among all flows of one impact assessment method or multiple impact categories: https://github.com/Vanessa-IREES/Finding-unique-biosphere-flows.git
 
 A preprint of the study is available: https://doi.org/10.20944/preprints202505.0503.v1
 
